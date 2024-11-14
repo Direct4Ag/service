@@ -10,6 +10,10 @@
                     "researchName": "01 Research",
                     "researchArea": "Nitrogen Conservation",
                     "researchType": "Cover Crop",
+                    "research_pi": "",
+                    "research_contact_info": "",
+                    "research_introduction": "",
+                    "research_conclusion": "",
                     "sensors": [
                         {
                             "sensorId": 1,
@@ -37,6 +41,10 @@
                     "researchName": "02 Research",
                     "researchArea": "Water Resource Management",
                     "researchType": "Drought-resistant Seeds",
+                    "research_pi": "",
+                    "research_contact_info": "",
+                    "research_introduction": "",
+                    "research_conclusion": "",
                     "sensors": [
                         {
                             "sensorId": 3,
@@ -81,6 +89,10 @@
                     "researchName": "03 Research",
                     "researchArea": "Nitrogen Conservation",
                     "researchType": "Crop Rotation",
+                    "research_pi": "",
+                    "research_contact_info": "",
+                    "research_introduction": "",
+                    "research_conclusion": "",
                     "sensors": [
                         {
                             "sensorId": 5,
@@ -163,6 +175,10 @@
                     "researchName": "04 Research",
                     "researchArea": "Water Resource Management",
                     "researchType": "Irrigation Strategies",
+                    "research_pi": "",
+                    "research_contact_info": "",
+                    "research_introduction": "",
+                    "research_conclusion": "",
                     "sensors": [
                         {
                             "sensorId": 7,
