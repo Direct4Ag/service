@@ -16,6 +16,7 @@ from .field import (
     NitrateConcentrationGeostreamsData,
     SoilMoistureGeostreamsData,
     WeatherGeostreamsData,
+    Years,
 )
 from .research import ResearchCreate, ResearchDetails, ResearchSummary, ResearchUpdate
 from .sensor import SensorCreate, SensorDetails, SensorSummary, SensorUpdate

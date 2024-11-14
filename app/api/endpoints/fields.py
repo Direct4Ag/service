@@ -165,6 +165,24 @@ def delete_sensor(
     return sensor
 
 
+@router.get("/{field_id}/sensors/get-years", response_model=schemas.Years)
+def get_years(
+    field_id: str,
+    db: Session = Depends(deps.get_db),
+) -> Any:
+    """Get all the sensors for the given field id."""
+    sensors = crud.field.get_sensors(db, id=field_id)
+    years = []
+    for sensor in sensors:
+        if sensor.sensor_type == "weather":
+            uri = f"{settings.GEOSTREAMS_API_STR}cache/year/{sensor.sensor_id}"
+            response = requests.get(uri)
+            data = response.json()
+            years.extend([d["year"] for d in data["properties"]["avg_air_temp"]])
+
+    return {"years": sorted(list(set(years)))}
+
+
 @router.get(
     "/{field_id}/sensors/get-geostreams-data/nitrate-conc/{year}",
     response_model=schemas.NitrateConcentrationGeostreamsData,
@@ -176,10 +194,9 @@ def read_field_sensors_nitrate_concentration_geostreams_data(
 ):
     """Get all the sensors for the given field id."""
     sensors = crud.field.get_sensors(db, id=field_id)
-    print(sensors)
     nitrate_data_endpoints = get_geostream_uris(sensors, "nitrogen_conc", year)
     nitrate_data = []
-    print(nitrate_data_endpoints)
+
     for nitrate_data_endpoint in nitrate_data_endpoints:
         response = requests.get(nitrate_data_endpoint)
         data = response.json()

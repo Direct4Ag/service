@@ -105,3 +105,12 @@ class WeatherGeostreamsData(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
+
+
+class Years(BaseModel):
+    """Model for Geostreams data"""
+
+    years: list
+
+    class Config:
+        arbitrary_types_allowed = True

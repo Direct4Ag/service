@@ -26,6 +26,10 @@ class Research(Base):
     research_name: str = Column(String(200), nullable=False)
     research_area: str = Column(String(200), nullable=False)
     research_type: str = Column(String(200), nullable=False)
+    research_pi: str = Column(String(200), nullable=True, default="")
+    research_contact_info: str = Column(String(200), nullable=True, default="")
+    research_introduction: str = Column(String(400), nullable=True, default="")
+    research_conclusion: str = Column(String(400), nullable=True, default="")
 
     field_ref_id: str = Column(
         UUID(as_uuid=True), ForeignKey("fields.id"), nullable=False
