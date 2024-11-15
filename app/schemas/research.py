@@ -13,6 +13,10 @@ class ResearchBase(BaseModel):
     research_name: str
     research_area: str
     research_type: str
+    research_pi: str
+    research_contact_info: str
+    research_introduction: str
+    research_conclusion: str
 
 
 class ResearchSummaryInDB(ResearchBase):

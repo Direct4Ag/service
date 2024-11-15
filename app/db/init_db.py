@@ -120,6 +120,10 @@ class Data:
                     "research_name": field["researchName"],
                     "research_area": field["researchArea"],
                     "research_type": field["researchType"],
+                    "research_pi": field["research_pi"],
+                    "research_contact_info": field["research_contact_info"],
+                    "research_introduction": field["research_introduction"],
+                    "research_conclusion": field["research_conclusion"],
                     "field_ref_id": field_in_db.id,
                 }
 
