@@ -179,8 +179,9 @@ def get_years(
             response = requests.get(uri)
             data = response.json()
             years.extend([d["year"] for d in data["properties"]["avg_air_temp"]])
+    years = [str(y) for y in sorted(list(set(years)))]
 
-    return {"years": sorted(list(set(years)))}
+    return {"years": years}
 
 
 @router.get(

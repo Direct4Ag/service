@@ -47,6 +47,7 @@ class CRUDField(CRUDBase[Field, FieldCreate, FieldUpdate]):
                 for i, row in enumerate(query)
             ],
         }
+        print(geojson_response)
 
         return geojson_response
 
