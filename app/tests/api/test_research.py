@@ -49,3 +49,16 @@ def test_read_research_by(
         f"{settings.API_STR}/research/researchby/?research_area={research_area}&research_type={research_type}"
     )
     assert response.status_code == 200
+
+
+@pytest.mark.parametrize("skip", [3])
+def test_read_research_sensors_by_id(
+    client: TestClient, skip: int, db: Session
+) -> None:
+    researches = crud.research.get_multi(db, skip=skip, limit=1)
+    research_id = None
+    if researches:
+        research_id = researches[0].id
+
+    response = client.get(f"{settings.API_STR}/research/{research_id}/sensors")
+    assert response.status_code == 200

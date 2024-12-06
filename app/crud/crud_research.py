@@ -3,7 +3,7 @@ from typing import List, Optional
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import Research
+from app.models import Research, Sensors
 from app.schemas import ResearchCreate, ResearchUpdate
 
 
@@ -36,6 +36,12 @@ class CRUDResearch(CRUDBase[Research, ResearchCreate, ResearchUpdate]):
                 Research.research_type == research_type,
             ),
             order_by=["research_name"],
+        ).all()
+
+    def get_sensors(self, db: Session, id: str) -> List[Sensors]:
+        return self.order_by(
+            db.query(Sensors).filter(Sensors.research_ref_id == id),
+            order_by=["depth"],
         ).all()
 
 

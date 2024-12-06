@@ -112,99 +112,149 @@ class Data:
                 field_in_db = crud.field.create(self.db, obj_in=obj_in)
 
                 # Insert Researches
-                logger.info(
-                    f"Importing research {field['researchName']} for field: {field['fieldName']}"
-                )
 
-                obj_in = {
-                    "research_name": field["researchName"],
-                    "research_area": field["researchArea"],
-                    "research_type": field["researchType"],
-                    "research_pi": field["research_pi"],
-                    "research_contact_info": field["research_contact_info"],
-                    "research_introduction": field["research_introduction"],
-                    "research_conclusion": field["research_conclusion"],
-                    "field_ref_id": field_in_db.id,
-                }
-
-                research = crud.research.create(self.db, obj_in=obj_in)
-
-                # Insert Drought Resistant Seed Data if available
-                if len(field["drs_yield_data"]) > 0:
+                for research in field["research"]:
                     logger.info(
-                        f"Importing DRS Yield Data for research: {field['researchName']}"
+                        f"Importing research {research['researchName']} for field: {field['fieldName']}"
                     )
-                    for drs_yield in field["drs_yield_data"]:
-                        obj_in = {
-                            "replicate": drs_yield["replicate"],
-                            "line": drs_yield["line"],
-                            "planting_date": parse_date(drs_yield["planting_date"]),
-                            "harvest_date": parse_date(drs_yield["harvest_date"]),
-                            "crop_yield": drs_yield["crop_yield"],
-                            "yield_unit": drs_yield["yield_unit"],
-                            "research_ref_id": research.id,
-                        }
-                        crud.drs_yield.create(self.db, obj_in=obj_in)
 
-                # Insert Crop Rotation Data if available
-                if len(field["crop_rotation_yield"]) > 0:
-                    logger.info(
-                        f"Importing Crop Rotation Data for research: {field['researchName']}"
-                    )
-                    for crop_rotation in field["crop_rotation_yield"]:
-                        obj_in = {
-                            "planting_date": parse_date(crop_rotation["planting_date"]),
-                            "harvest_date": parse_date(crop_rotation["harvest_date"]),
-                            "crop": crop_rotation["crop"],
-                            "crop_yield": crop_rotation["crop_yield"],
-                            "yield_unit": crop_rotation["yield_unit"],
-                            "seeding_rate": crop_rotation["seeding_rate"],
-                            "seeding_rate_unit": crop_rotation["seeding_rate_unit"],
-                            "total_fertilizer_applied": crop_rotation[
-                                "total_fertilizer_applied"
-                            ],
-                            "total_fertilizer_applied_unit": crop_rotation[
-                                "total_fertilizer_applied_unit"
-                            ],
-                            "crop_rot_research_ref_id": research.id,
-                        }
-                        crop_rot = crud.crop_rotation.create(self.db, obj_in=obj_in)
-
-                        # Insert Fertilizers
-                        for fertilizer in crop_rotation["fertilizer"]:
-                            logger.info(
-                                f"Importing fertilizer for crop rotation: {crop_rotation['planting_date']}"
-                            )
-                            obj_in = {
-                                "fertilizer_date": parse_date(
-                                    fertilizer["fertilizer_date"]
-                                ),
-                                "fertilizer_rate": fertilizer["fertilizer_rate"],
-                                "fertilizer_rate_unit": fertilizer[
-                                    "fertilizer_rate_unit"
-                                ],
-                                "fertilizer_type": fertilizer["fertilizer_type"],
-                                "fertilizer_application_description": fertilizer[
-                                    "description"
-                                ],
-                                "crop_rot_ref_id": crop_rot.id,
-                            }
-
-                            crud.fertilizer.create(self.db, obj_in=obj_in)
-
-                # Insert Sensors
-                for sensor in field["sensors"]:
-                    logger.info(
-                        f"Importing sensor {sensor['sensorId']} for field: {field['fieldName']}"
-                    )
                     obj_in = {
-                        "depth": sensor["depth"],
-                        "sensor_id": sensor["sensorId"],
-                        "sensor_type": sensor["sensorType"],
+                        "research_name": research["researchName"],
+                        "research_area": research["researchArea"],
+                        "research_type": research["researchType"],
+                        "research_pi": research["research_pi"],
+                        "research_contact_info": research["research_contact_info"],
+                        "research_introduction": research["research_introduction"],
+                        "research_conclusion": research["research_conclusion"],
                         "field_ref_id": field_in_db.id,
                     }
 
-                    crud.sensor.create(self.db, obj_in=obj_in)
+                    research_in = crud.research.create(self.db, obj_in=obj_in)
+
+                    if research["researchKey"] == "cover_crop_data":
+                        logger.info(
+                            f"Importing Cover Crop Data for research: {research['researchName']}"
+                        )
+                        for cover_crop in research["cover_crop_data"]:
+                            obj_in = {
+                                "crop": cover_crop["crop"],
+                                "planting_date": parse_date(
+                                    cover_crop["planting_date"]
+                                ),
+                                "planting_method": cover_crop["planting_method"],
+                                "seeding_rate": cover_crop["seeding_rate"],
+                                "seeding_rate_unit": cover_crop["seeding_rate_unit"],
+                                "termination_date": parse_date(
+                                    cover_crop["termination_date"]
+                                ),
+                                "cover_crop_research_ref_id": research_in.id,
+                            }
+                            cover_crop_in = crud.cover_crop.create(
+                                self.db, obj_in=obj_in
+                            )
+
+                            for d in cover_crop["data"]:
+                                logger.info(
+                                    f"Importing cover crop data for cover crop: {cover_crop['crop']}"
+                                )
+                                obj_in = {
+                                    "observed_cover_crop_biomass": d[
+                                        "observed_cover_crop_biomass"
+                                    ],
+                                    "sampling_date": parse_date(d["sampling_date"]),
+                                    "predicted_cover_crop_biomass": d[
+                                        "predicted_cover_crop_biomass"
+                                    ],
+                                    "cover_crop_biomass_unit": d[
+                                        "cover_crop_biomass_unit"
+                                    ],
+                                    "observed_CN_ratio": d["observed_CN_ratio"],
+                                    "predicted_CN_ratio": d["predicted_CN_ratio"],
+                                    "cover_crop_data_ref_id": cover_crop_in.id,
+                                }
+                                crud.cover_crop_data.create(self.db, obj_in=obj_in)
+
+                    if research["researchKey"] == "crop_rotation_yield":
+                        logger.info(
+                            f"Importing Crop Rotation Data for research: {research['researchName']}"
+                        )
+                        for crop_rotation in research["crop_rotation_yield"]:
+                            obj_in = {
+                                "planting_date": parse_date(
+                                    crop_rotation["planting_date"]
+                                ),
+                                "harvest_date": parse_date(
+                                    crop_rotation["harvest_date"]
+                                ),
+                                "crop": crop_rotation["crop"],
+                                "crop_yield": crop_rotation["crop_yield"],
+                                "yield_unit": crop_rotation["yield_unit"],
+                                "seeding_rate": crop_rotation["seeding_rate"],
+                                "seeding_rate_unit": crop_rotation["seeding_rate_unit"],
+                                "total_fertilizer_applied": crop_rotation[
+                                    "total_fertilizer_applied"
+                                ],
+                                "total_fertilizer_applied_unit": crop_rotation[
+                                    "total_fertilizer_applied_unit"
+                                ],
+                                "crop_rot_research_ref_id": research_in.id,
+                            }
+                            crop_rot = crud.crop_rotation.create(self.db, obj_in=obj_in)
+
+                            # Insert Fertilizers
+                            for fertilizer in crop_rotation["fertilizer"]:
+                                logger.info(
+                                    f"Importing fertilizer for crop rotation: {crop_rotation['planting_date']}"
+                                )
+                                obj_in = {
+                                    "fertilizer_date": parse_date(
+                                        fertilizer["fertilizer_date"]
+                                    ),
+                                    "fertilizer_rate": fertilizer["fertilizer_rate"],
+                                    "fertilizer_rate_unit": fertilizer[
+                                        "fertilizer_rate_unit"
+                                    ],
+                                    "fertilizer_type": fertilizer["fertilizer_type"],
+                                    "fertilizer_application_description": fertilizer[
+                                        "description"
+                                    ],
+                                    "crop_rot_ref_id": crop_rot.id,
+                                }
+
+                                crud.fertilizer.create(self.db, obj_in=obj_in)
+
+                    if research["researchKey"] == "cover_crop_data":
+                        pass
+
+                    if research["researchKey"] == "drs_yield_data":
+                        logger.info(
+                            f"Importing DRS Yield Data for research: {research['researchName']}"
+                        )
+                        for drs_yield in research["drs_yield_data"]:
+                            obj_in = {
+                                "replicate": drs_yield["replicate"],
+                                "line": drs_yield["line"],
+                                "planting_date": parse_date(drs_yield["planting_date"]),
+                                "harvest_date": parse_date(drs_yield["harvest_date"]),
+                                "crop_yield": drs_yield["crop_yield"],
+                                "yield_unit": drs_yield["yield_unit"],
+                                "research_ref_id": research_in.id,
+                            }
+                            crud.drs_yield.create(self.db, obj_in=obj_in)
+
+                    # Insert Sensors
+                    for sensor in research["sensors"]:
+                        logger.info(
+                            f"Importing sensor {sensor['sensorId']} for research: {research['researchName']}"
+                        )
+                        obj_in = {
+                            "depth": sensor["depth"],
+                            "sensor_id": sensor["sensorId"],
+                            "sensor_type": sensor["sensorType"],
+                            "research_ref_id": research_in.id,
+                        }
+
+                        crud.sensor.create(self.db, obj_in=obj_in)
 
 
 if __name__ == "__main__":

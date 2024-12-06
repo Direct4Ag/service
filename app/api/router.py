@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from app.core.config import get_settings
 
 from .endpoints import (
+    cover_crop_router,
     crop_rotation_yield_router,
     drs_yield_router,
     farms_router,
@@ -26,4 +27,9 @@ api_router.include_router(
     crop_rotation_yield_router,
     prefix="/crop-rotation-yield",
     tags=["crop_rotation_yield"],
+)
+api_router.include_router(
+    cover_crop_router,
+    prefix="/cover-crop",
+    tags=["cover_crop"],
 )

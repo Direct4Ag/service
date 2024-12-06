@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship
 from app.db.base_class import Base
 
 if TYPE_CHECKING:
-    from app.models import Field
+    from app.models import Research
 
 
 class Sensors(Base):
@@ -20,8 +20,14 @@ class Sensors(Base):
     sensor_type: str = Column(String(200), nullable=True, default="")
     sensor_id: int = Column(Integer, nullable=False)
 
-    field_ref_id: str = Column(
-        UUID(as_uuid=True), ForeignKey("fields.id"), nullable=False
+    research_ref_id: str = Column(
+        UUID(as_uuid=True),
+        ForeignKey("research.id"),
+        nullable=False,
     )
 
-    field: "Field" = relationship("Field", back_populates="sensors")
+    research: "Research" = relationship(
+        "Research",
+        back_populates="sensors",
+        foreign_keys=[research_ref_id],
+    )
