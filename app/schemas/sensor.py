@@ -2,7 +2,7 @@ import uuid
 
 from pydantic import BaseModel
 
-from app.schemas.field import FieldDetails
+from app.schemas.research import ResearchDetails
 
 
 class SensorBase(BaseModel):
@@ -27,11 +27,11 @@ class SensorSummary(SensorSummaryInDB):
 
 
 class SensorDetailBase(SensorBase):
-    field_ref_id: uuid.UUID
+    research_ref_id: uuid.UUID
 
 
 class SensorDetailInDB(SensorDetailBase):
-    field: FieldDetails
+    research: ResearchDetails
     id: uuid.UUID
 
     class Config:

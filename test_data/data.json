@@ -7,27 +7,31 @@
             "fields": [
                 {
                     "fieldName": "01",
-                    "researchName": "01 Research",
-                    "researchArea": "Nitrogen Conservation",
-                    "researchType": "Cover Crop",
-                    "research_pi": "",
-                    "research_contact_info": "",
-                    "research_introduction": "",
-                    "research_conclusion": "",
-                    "sensors": [
+                    "research": [
                         {
-                            "sensorId": 1,
-                            "depth": "5cm",
-                            "sensorType": "soil_moisture"
-                        },
-                        {
-                            "sensorId": 2,
-                            "depth": "15cm",
-                            "sensorType": "soil_moisture"
+                            "researchName": "01 Research",
+                            "researchArea": "Nitrogen Conservation",
+                            "researchType": "Cover Crop",
+                            "research_pi": "",
+                            "research_contact_info": "",
+                            "research_introduction": "",
+                            "research_conclusion": "",
+                            "researchKey" : "cover_crop_data",
+                            "sensors": [
+                                {
+                                    "sensorId": 1,
+                                    "depth": "5cm",
+                                    "sensorType": "soil_moisture"
+                                },
+                                {
+                                    "sensorId": 2,
+                                    "depth": "15cm",
+                                    "sensorType": "soil_moisture"
+                                }
+                            ],
+                             "cover_crop_data": []
                         }
-                    ],
-                    "drs_yield_data": [],
-                    "crop_rotation_yield": []
+                    ]
                 }
             ]
         },
@@ -38,44 +42,46 @@
             "fields": [
                 {
                     "fieldName": "02",
-                    "researchName": "02 Research",
-                    "researchArea": "Water Resource Management",
-                    "researchType": "Drought-resistant Seeds",
-                    "research_pi": "",
-                    "research_contact_info": "",
-                    "research_introduction": "",
-                    "research_conclusion": "",
-                    "sensors": [
-                        {
-                            "sensorId": 3,
-                            "depth": "30cm",
-                            "sensorType": "soil_moisture"
-                        },
-                        {
-                            "sensorId": 4,
-                            "depth": "50cm",
-                            "sensorType": "soil_moisture"
-                        }
-                    ],
-                    "drs_yield_data": [
-                        {
-                            "replicate": 1,
-                            "line": "R1151AM",
-                            "planting_date": "05/16/22",
-                            "harvest_date": "10/27/22",
-                            "crop_yield": 239.3907,
-                            "yield_unit": "bu/A"
-                        },
-                        {
-                            "replicate": 1,
-                            "line": "P1331AM",
-                            "planting_date": "05/16/22",
-                            "harvest_date": "10/27/22",
-                            "crop_yield": 240.2234,
-                            "yield_unit": "bu/A"
-                        }
-                    ],
-                    "crop_rotation_yield": []
+                    "research": [{
+                        "researchName": "02 Research",
+                        "researchArea": "Water Resource Management",
+                        "researchType": "Drought-resistant Seeds",
+                        "research_pi": "",
+                        "research_contact_info": "",
+                        "research_introduction": "",
+                        "research_conclusion": "",
+                        "researchKey" : "drs_yield_data",
+                        "sensors": [
+                            {
+                                "sensorId": 3,
+                                "depth": "30cm",
+                                "sensorType": "soil_moisture"
+                            },
+                            {
+                                "sensorId": 4,
+                                "depth": "50cm",
+                                "sensorType": "soil_moisture"
+                            }
+                        ],
+                        "drs_yield_data": [
+                            {
+                                "replicate": 1,
+                                "line": "R1151AM",
+                                "planting_date": "05/16/22",
+                                "harvest_date": "10/27/22",
+                                "crop_yield": 239.3907,
+                                "yield_unit": "bu/A"
+                            },
+                            {
+                                "replicate": 1,
+                                "line": "P1331AM",
+                                "planting_date": "05/16/22",
+                                "harvest_date": "10/27/22",
+                                "crop_yield": 240.2234,
+                                "yield_unit": "bu/A"
+                            }
+                        ]
+                    }]
                 }
             ]
         },
@@ -86,27 +92,29 @@
             "fields": [
                 {
                     "fieldName": "03",
-                    "researchName": "03 Research",
-                    "researchArea": "Nitrogen Conservation",
-                    "researchType": "Crop Rotation",
-                    "research_pi": "",
-                    "research_contact_info": "",
-                    "research_introduction": "",
-                    "research_conclusion": "",
-                    "sensors": [
+                    "research": [
                         {
-                            "sensorId": 5,
-                            "depth": "30cm",
-                            "sensorType": "soil_moisture"
-                        },
-                        {
-                            "sensorId": 6,
-                            "depth": "50cm",
-                            "sensorType": "soil_moisture"
-                        }
-                    ],
-                    "drs_yield_data": [],
-                    "crop_rotation_yield": [
+                            "researchName": "03 Research",
+                            "researchArea": "Nitrogen Conservation",
+                            "researchType": "Crop Rotation",
+                            "research_pi": "",
+                            "research_contact_info": "",
+                            "research_introduction": "",
+                            "research_conclusion": "",
+                            "researchKey" : "crop_rotation_yield",
+                            "sensors": [
+                                {
+                                    "sensorId": 5,
+                                    "depth": "30cm",
+                                    "sensorType": "soil_moisture"
+                                },
+                                {
+                                    "sensorId": 6,
+                                    "depth": "50cm",
+                                    "sensorType": "soil_moisture"
+                                }
+                            ],
+                            "crop_rotation_yield": [
                         {
                             "planting_date": "04/29/15",
                             "harvest_date": "09/30/15",
@@ -162,6 +170,8 @@
                             ]
                         }
                     ]
+                        }
+                    ]
                 }
             ]
         },
@@ -172,27 +182,30 @@
             "fields": [
                 {
                     "fieldName": "04",
-                    "researchName": "04 Research",
-                    "researchArea": "Water Resource Management",
-                    "researchType": "Irrigation Strategies",
-                    "research_pi": "",
-                    "research_contact_info": "",
-                    "research_introduction": "",
-                    "research_conclusion": "",
-                    "sensors": [
+                    "research": [
                         {
-                            "sensorId": 7,
-                            "depth": "30cm",
-                            "sensorType": "soil_moisture"
-                        },
-                        {
-                            "sensorId": 9,
-                            "depth": "50cm",
-                            "sensorType": "soil_moisture"
+                            "researchName": "04 Research",
+                            "researchArea": "Water Resource Management",
+                            "researchType": "Irrigation Strategies",
+                            "research_pi": "",
+                            "research_contact_info": "",
+                            "research_introduction": "",
+                            "research_conclusion": "",
+                            "researchKey" : "irrigation_strategies",
+                            "sensors": [
+                                {
+                                    "sensorId": 7,
+                                    "depth": "30cm",
+                                    "sensorType": "soil_moisture"
+                                },
+                                {
+                                    "sensorId": 9,
+                                    "depth": "50cm",
+                                    "sensorType": "soil_moisture"
+                                }
+                            ]
                         }
-                    ],
-                    "drs_yield_data": [],
-                    "crop_rotation_yield": []
+                    ]
                 }
             ]
         }

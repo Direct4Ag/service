@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Added Create and Delete endpoints for all the models [#42](https://github.com/Direct4Ag/ag-services/issues/42)
 - Added model for Crop rotation yields information and apis [#44](https://github.com/Direct4Ag/ag-services/issues/44)
 - New endpoint to fetch all available years for weather data and added extra fields in research table. [#49](https://github.com/Direct4Ag/ag-services/issues/49)
+- Cover Crop table and adjusted some ther tables to accomodate various changes. [#52](https://github.com/Direct4Ag/ag-services/issues/52)
 
 ### Fixed
 

@@ -1,3 +1,5 @@
+from .cover_crop import CoverCrop
+from .cover_crop_data import CoverCropData
 from .crop_rotation import CropRotation
 from .drs_yield import DroughtResistantSeedYield
 from .farm import Farm

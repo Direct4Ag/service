@@ -12,7 +12,7 @@ from app.utils.db import Geometry
 # from app.utils.db import Geometry # modify this to geography if required else remove this line
 
 if TYPE_CHECKING:
-    from app.models import Farm, Research, Sensors
+    from app.models import Farm, Research
 
 
 class Field(Base):
@@ -36,7 +36,4 @@ class Field(Base):
     farm: "Farm" = relationship("Farm", back_populates="fields")
     researches: List["Research"] = relationship(
         "Research", back_populates="field", cascade="all, delete"
-    )
-    sensors: List["Sensors"] = relationship(
-        "Sensors", back_populates="field", cascade="all, delete"
     )

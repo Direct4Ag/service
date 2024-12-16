@@ -91,4 +91,9 @@ def delete_crop_rotation(
 ) -> Any:
     """Delete crop rotation."""
     crop_rotation = crud.crop_rotation.delete(db, id=crop_rotation_id)
+    if not crop_rotation:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Crop rotation not found for {crop_rotation_id}",
+        )
     return crop_rotation

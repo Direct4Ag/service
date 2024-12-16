@@ -5,7 +5,7 @@ from geoalchemy2.functions import ST_AsGeoJSON
 from sqlalchemy.orm import Session
 
 from app.crud.base import CRUDBase
-from app.models import Field, Research, Sensors
+from app.models import Field, Research
 from app.schemas import FieldCreate, FieldUpdate
 
 
@@ -14,12 +14,6 @@ class CRUDField(CRUDBase[Field, FieldCreate, FieldUpdate]):
         return self.order_by(
             db.query(Research).filter(Research.field_ref_id == id),
             order_by=["research_area"],
-        ).all()
-
-    def get_sensors(self, db: Session, id: str) -> List[Sensors]:
-        return self.order_by(
-            db.query(Sensors).filter(Sensors.field_ref_id == id),
-            order_by=["depth"],
         ).all()
 
     def get_field_geojson(self, db: Session) -> dict:
