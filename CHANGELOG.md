@@ -24,4 +24,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- Fix CORS error due to imperfect allowed backend urls [#26](https://github.com/Direct4Ag/ag-services/issues/26)
+- CORS error due to imperfect allowed backend urls [#26](https://github.com/Direct4Ag/ag-services/issues/26)
+- Incorrect VPD values due to wrong temperature unit. [#58](https://github.com/Direct4Ag/ag-services/issues/58)
