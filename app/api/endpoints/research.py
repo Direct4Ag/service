@@ -41,6 +41,11 @@ def get_vpd(T, RH, elevation=0):
     return round(vpd / 10, 3)
 
 
+# write a function to convert temperature to Celsius from Fahrenheit
+def fahrenheit_to_celsius(fahrenheit):
+    return (fahrenheit - 32) * 5.0 / 9.0
+
+
 def get_geostream_uris(
     sensors: List[models.Sensors], sensor_type: str, year: str
 ) -> List[dict]:
@@ -284,7 +289,7 @@ def read_field_sensors_weather_geostreams_data(
         # calculate VPD
         vpd_data = []
         for i in zip(temp_avg_air, temp_rel_hum):
-            vpd = get_vpd(i[0]["average"], i[1]["average"])
+            vpd = get_vpd(fahrenheit_to_celsius(i[0]["average"]), i[1]["average"])
             vpd_data.append(
                 {
                     "average": vpd,

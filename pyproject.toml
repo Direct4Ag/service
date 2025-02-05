@@ -3,6 +3,7 @@ name = "direct4ag-api"
 version = "0.1.0"
 description = ""
 authors = ["Christopher Navarro <cmnavarr@illinois.edu>"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
@@ -22,6 +23,7 @@ geopandas = "^0.14.2"
 httpx = "^0.27.0"
 requests = "^2.32.3"
 numpy = "^1.26.4"
+mako = "1.3.2"
 
 [tool.poetry.dev-dependencies]
 alembic-autogen-check = "^1.1.1"
